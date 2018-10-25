@@ -37,7 +37,11 @@ Click the "Start" button on the bottom of the menu on the right, and select how 
 Each data stream in OSA requires a designated Kafka topic.  These are created in OSA via SSH.
 
 ### SSH into the OSA Instance
-Click on the blue "Application Documentation" icon in the top menu bar of the application canvas on Ravello.  Take note of the username and password for SSH access to OSA.  SSH into the OSA instance using that username and password, along with the public IP address of the OSA instance.
+Click on the blue "Application Documentation" icon in the top menu bar of the application canvas on Ravello.  The location of this icon is shown in the screenshot below.
+
+![image](https://user-images.githubusercontent.com/42782692/47528304-b24ed580-d859-11e8-8394-3ad8e9ff13e3.png)
+
+Take note of the username and password for SSH access to OSA.  SSH into the OSA instance using that username and password, along with the public IP address of the OSA instance.
 
 ```
 ssh [username]@[public IP]
@@ -113,7 +117,7 @@ In line 25, we send data to a specific Kafka topic using the Kafka producer that
 Now that Ravello, Python, and your local machine are configured, the next step is accessing OSA in your browser and setting up the data stream.
 
 ### Access OSA
-To access the OSA interface, you will need the OSA public IP address and the OSA port number found in the summary tab of the Ravello application menu.  Navigate to the following address in your browser:
+To access the OSA interface, you will need the OSA public IP address and the OSA port number found in the summary tab of the Ravello application menu.  Make sure you are not on a network that will block your connection (e.g. clear corporate), then navigate to the following address in your browser:
 
 ```
 [OSA public IP]:[OSA port number]/osa
@@ -128,7 +132,7 @@ Connections link to Kafka topics, and allow you to access the data that Python i
 
 Enter a name for the connection, a description and tags if desired, and then select "Kafka" for the connection type.  Click next.
 
-In "Connection Details", enter the OSA public IP address followed by the port number for Zookeeper, found in the Ravellow application summary.
+In "Connection Details", enter the OSA public IP address followed by the port number for Zookeeper.  The zookeeper port number is found in the smmary tab of the right-hand menu of Ravello, in the blue box by the start and stop buttons.
 
 ```
 [OSA public IP]:[zookeeper port number]
@@ -162,6 +166,24 @@ At this point, click on "Manual Shape" to edit the field names and field types. 
 Change the field type of Temperature, Light, and Humidity to "Number".  Change the CurrentTime field type to "Timestamp".  Leave CurrentDate as "Text", and change DateTime to "Big Integer".  Click to clock icon next to DateTime to set that field as the timestamp.  Click "Save".
 
 ### Create a Pipeline
+Pipelines allow you to work with the data points (events) in the data stream, filtering or processing the events as needed.  In the OSA catalog, click "Create New Item" and select "Pipeline" from the drop-down menu.  Give the pipeline a name, a description and tags as desired, and select your recently created stream from the "Stream" drop-down.  Click "Save".  This will open the pipeline editor.  Wait for the "Live Output" window to finish "Starting Pipeline", and then you should see data points streaming in from kafkaStream.py.
+
+At this point you are ready to work with your real-time streaming data.
+
+### Stages and Visualizations
+The pipeline editor initially only shows your stream, where all your data is streaming in as events.  Stages allow you to process these events in various ways.
+
+To create a stage, right-click on the stream in the pipeline editor, and hover over "Add a Stage", then select the desired stage for your data.  For a simple example with the provided IoT data, select "Query" and name the query stage "Temperature Filter".  With the Temperature Filter icon selected, click on the "Filters" tab in the editor on the right of the screen and then click "Add a Filter".  
+
+Make sure that "Match All" is selected.  In the "Select a field" drop-down menu, select "Temperature", and in "Select an operator" select "greater than".  In the "Enter a value" text box, type 72, or another temperature threshold value if you prefer.  Click in the white space outside of the filter parameters to stop editing the filter.  Now, if the Temperature Filter icon is selected in the block diagram, the "Live Output" window will display only events where the temperature exceeds the threshold in the filter.
+
+To create a simple visualization, right click on the stream, hover over "Add a Stage", and select "Rule".  Name the rule stage "Temperature Visual" and give it a description if desired.  In the "Rules" tab of the rule editor, name the rule "Visual" and click "Done".  Next, in the "IF" section of the rule, make sure "Match All" is selected, and click "Add a Condition".  Choose "Temperature" for "Select a field", and choose "is not null" for "Select and operator".
+
+Next, click "Add Action" in the "THEN" section.  In the "Select a field" drop-down choose "Temperature", and in the expression text box type "=Temperature" and click the "Temperature" field that populates under the text box.  All that this rule does is pass all valid temperature values through to our visualization.  Click in the white space outside of the rule parameters to stop editing the rule.
+
+After creating the rule, click the "Visualizations" tab in the rule stage editor, click "Add a Visualization", and select "Line Chart".  In the pop-up window name your chart "TemperatureChart" and give it a description and tags if desired.  Set the "Y Axis Field Selection" to "Temperature" by clicking the plus sign next to "Specify Value".  Label the Y axis "Temperature" in the "Axis Label" text box.  Use the "X Axis Field Selection" drop-down to select "DateTime" as the X axis value.  Set the X axis label to "Time".  Leave "Horizontal" unchecke for "Orientation", and leave "Data Series Selection" blank.  Finally, click "Create".  You can view this visualization in real-time in the "Visualizations" tab of the "Temperature Visual" rule stage, or in a dashboard as described in a following section.
+
+### Set Targets
 
 ### Create a Dashboard
 
