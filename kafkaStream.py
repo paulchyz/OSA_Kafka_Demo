@@ -2,13 +2,14 @@ from kafka import KafkaProducer
 import json, time
 
 # Configure IP, port, and format address
-# Replace osaIP with your OSA IP address
-osaIP = '129.146.151.215'
+# Insert your OSA IP in quotations (Example: osaIP = 'x.x.x.x')
+osaIP = 'your_OSA_IP'
 kafkaPort = '9092'
 address = osaIP + ':' + kafkaPort
 
 # Set name of Kafka topic for sending data, and set file name for the data
-topic = 'demo'
+# Insert your Kafka topic name in quotations (Example: topic = 'demo')
+topic = 'your_kafka_topic_name'
 dataFile = 'iotData.json'
 
 # Create a kafka producer
