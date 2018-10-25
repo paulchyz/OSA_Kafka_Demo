@@ -6,6 +6,7 @@ This is a simple walkthrough to get started streaming data to Oracle Stream Anal
 ### Prerequisites
 
 ### System Architecture
+![image](https://user-images.githubusercontent.com/42782692/47517279-8cff9e80-d83c-11e8-96ec-6c76bd360e0a.png)
 
 ## Setting Up Ravello for OSA
 If you have access to the Oracle Ravello OSA OGG Demo Blueprint, follow the steps below to configure the blueprint for use with the rest of this walkthrough.
@@ -32,3 +33,5 @@ Click the "Start" button on the bottom of the menu on the right, and select how 
 ### Creating a Pipeline
 
 ### Creating a Dashboard
+
+## Next Steps
