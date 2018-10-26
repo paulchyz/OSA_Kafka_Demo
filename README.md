@@ -125,10 +125,10 @@ To access the OSA interface, you will need the OSA public IP address and the OSA
 
 This should direct you to a login page, where you should enter the username and password provided by clicking on the blue "Application Documentation" icon in the top menu bar of the application canvas in Ravello.
 
-After logging in, you will be directed to the "Home" tab of OSA.  Click on the "Catalog" tab in the menu on the top right corner of the page, as the next steps will work from that page.
+At this point, you have completed the configuration and initial setup for OSA with Kafka and Python.  The following sections will walk you through some simple actions in OSA to get you started, but the real power of OSA will be when you explore OSA's capabilities to create innovative solutions.
 
 ### Create a Connection
-Connections link to Kafka topics, and allow you to access the data that Python is sending to Kafka.  In the catalog, click the green "Create New Item" button and select "Connection" from the drop-down menu.
+Connections link to Kafka topics, and allow you to access the data that Python is sending to Kafka.  Navigate to the "Catalog" tab in the top right corner of OSA.  This is where most of your OSA work will occur.  Click the green "Create New Item" button and select "Connection" from the drop-down menu.
 
 Enter a name for the connection, a description and tags if desired, and then select "Kafka" for the connection type.  Click next.
 
