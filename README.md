@@ -25,7 +25,7 @@ For the demo to run successfully, make sure that the provided data file "iotData
 If you have access to the Oracle Ravello "OSA OGG Demo" Blueprint, follow the steps below to configure the blueprint for use with the rest of this walkthrough.
 
 ### Initialize the Ravello Application
-Once the blueprint is in your library, click "Create Application" and provide a different name if desired.  Locate this new application in the applications menu, and click "Publish".  
+In Ravello, click "Library", then click "Blueprints".  Click the "Shared with Me" button in the top right of the page, and click on the "OSA OGG Demo" blueprint.  Now click the orange "Copy to My Blueprints" button, then navigate back to your blueprint library and click on your new blueprint.  Click "Create Application" and provide a different name if desired.  Locate this new application in the applications menu, and click "Publish".  
 
 ### Configure the Application's NIC
 After publishing your application, the NIC configuration should be changed to use an elastic IP address.  To do this, click on the application bock in the canvas to open the menu on the right side of the screen.  Select the header that says "NICs" and click "Open" on the DHCP section.  Click "Elastic IP", then click "Select".  In the pop-up window, click "Create Elastic IP Address" and select the appropriate region.  Check the box for the new IP address to select it, then click "Select" at the botttom of the window.  Click "Save" in the menu on the right, and then update the application with "Update" at the top of the canvas.  This will ensure that the application uses the same IP address every time it restarts.
