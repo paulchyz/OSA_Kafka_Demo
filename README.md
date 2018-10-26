@@ -7,7 +7,7 @@ These instruciton will explain the steps necessary to stream data into OSA on Ra
 ### Prerequisites
 * Ravello Account
 * Ravello "OSA OGG Demo" Blueprint
-* Python 2.7
+* Python 2.7 or later
 * kafka-python module
 
 Installing kafka-python:
@@ -28,10 +28,10 @@ If someone has shared access to the Oracle Ravello "OSA OGG Demo" Blueprint with
 In Ravello, click "Library", then click "Blueprints".  Click the "Shared with Me" button in the top right of the page, and click on the "OSA OGG Demo" blueprint.  Now click the orange "Copy to My Blueprints" button, then navigate back to your blueprint library and click on your new blueprint.  Click "Create Application" and provide a different name if desired.  Locate this new application in the applications menu, and click "Publish".  
 
 ### Configure the Application's NIC
-After publishing your application, the NIC configuration should be changed to use an elastic IP address.  To do this, click on the application bock in the canvas to open the menu on the right side of the screen.  Select the header that says "NICs" and click "Open" on the DHCP section.  Click "Elastic IP", then click "Select".  In the pop-up window, click "Create Elastic IP Address" and select the appropriate region.  Check the box for the new IP address to select it, then click "Select" at the botttom of the window.  Click "Save" in the menu on the right, and then update the application with "Update" at the top of the canvas.  This will ensure that the application uses the same IP address every time it restarts.
+After publishing your application, the NIC configuration should be changed to use an elastic IP address.  To do this, click on the application bock in the canvas to open the menu on the right side of the screen.  Select the header that says "NICs" and click "Open" on the DHCP section.  Click "Elastic IP", then click "Select".  In the pop-up window, click "Create Elastic IP Address" and select the appropriate region.  Check the box for the new IP address to select it, then click "Select" at the bottom of the window.  Click "Save" in the menu on the right, and then update the application with "Update" at the top of the canvas.  This will ensure that the application uses the same IP address every time it restarts.
 
 ### Run the OSA Application
-Click the "Start" button on the bottom of the menu on the right, and select how long you want the application to run.  It will take aproximately 5 minutes for the application to show that it is running, and about 5 more after that to be able to access OSA.  Also take note of the port numbers in the summary section of the menu on the right side of the screen.  Those will be used later on in Python and OSA.
+Click the "Start" button on the bottom of the menu on the right, and select how long you want the application to run.  It will take aproximately 5 minutes for the application to show that it is running, and about 5 more after that to be able to access OSA.  Also take note of the elastic IP address and port numbers in the summary section of the menu on the right side of the screen.  Those will be used later on in Python and OSA.
 
 ## Creating a Kafka Topic
 Each data stream in OSA requires a designated Kafka topic.  These are created in OSA via SSH.
@@ -78,7 +78,7 @@ The "kafkaPort" value is set based on the Ravello blueprint, but needs to be upd
 ### Configure Hosts File
 In order for the Python script to connect with Kafka, you need to update the hosts file in /etc on your computer.  This will provide the proper IP address for the Kafka connection.
 
-Start by navigating to the file's directory.
+Start by opening your command line on your local computer and navigating to the file's directory.
 
 ```
 cd /etc
@@ -132,7 +132,7 @@ Connections link to Kafka topics, and allow you to access the data that Python i
 
 Enter a name for the connection, a description and tags if desired, and then select "Kafka" for the connection type.  Click next.
 
-In "Connection Details", enter the OSA public IP address followed by the port number for Zookeeper.  The zookeeper port number is found in the smmary tab of the right-hand menu of Ravello, in the blue box by the start and stop buttons.
+In "Connection Details", enter the OSA public IP address followed by the port number for Zookeeper.  The zookeeper port number is found in the summary tab of the right-hand menu of Ravello, in the blue box by the start and stop buttons.  You might have to scroll down in the box to find it.
 
 ```
 [OSA public IP]:[zookeeper port number]
@@ -177,11 +177,11 @@ To create a stage, right-click on the stream in the pipeline editor, and hover o
 
 Make sure that "Match All" is selected.  In the "Select a field" drop-down menu, select "Temperature", and in "Select an operator" select "greater than".  In the "Enter a value" text box, type 72, or another temperature threshold value if you prefer.  Click in the white space outside of the filter parameters to stop editing the filter.  Now, if the Temperature Filter icon is selected in the block diagram, the "Live Output" window will display only events where the temperature exceeds the threshold in the filter.  This output can be sent to other destinations using targets, which will be described in the next section.
 
-To create a simple visualization, right click on the stream, hover over "Add a Stage", and select "Rule".  Name the rule stage "Temperature Visual" and give it a description if desired.  In the "Rules" tab of the rule editor, name the rule "Visual" and click "Done".  Next, in the "IF" section of the rule, make sure "Match All" is selected, and click "Add a Condition".  Choose "Temperature" for "Select a field", and choose "is not null" for "Select and operator".
+To create a simple visualization, right click on the stream, hover over "Add a Stage", and select "Rule".  Name the rule stage "Temperature Visual" and give it a description if desired.  In the "Rules" tab of the rule editor, name the rule "Visual" and click "Done".  Next, in the "IF" section of the rule, make sure "Match All" is selected, and click "Add a Condition".  Choose "Temperature" for "Select a field", and choose "is not null" for "Select and operator", scrolling down in the menu if necessary.
 
 Next, click "Add Action" in the "THEN" section.  In the "Select a field" drop-down choose "Temperature", and in the expression text box type "=Temperature" and click the "Temperature" field that populates under the text box.  All that this rule does is pass all valid temperature values through to our visualization.  Click in the white space outside of the rule parameters to stop editing the rule.
 
-After creating the rule, click the "Visualizations" tab in the rule stage editor, click "Add a Visualization", and select "Line Chart".  In the pop-up window name your chart "TemperatureChart" and give it a description and tags if desired.  Set the "Y Axis Field Selection" to "Temperature" by clicking the plus sign next to "Specify Value".  Label the Y axis "Temperature" in the "Axis Label" text box.  Use the "X Axis Field Selection" drop-down to select "DateTime" as the X axis value.  Set the X axis label to "Time".  Leave "Horizontal" unchecke for "Orientation", and leave "Data Series Selection" blank.  Finally, click "Create".  You can view this visualization in real-time in the "Visualizations" tab of the "Temperature Visual" rule stage, or in a dashboard as described in a following section.
+After creating the rule, click the "Visualizations" tab in the rule stage editor, click "Add a Visualization", and select "Line Chart".  In the pop-up window name your chart "TemperatureChart" and give it a description and tags if desired.  Set the "Y Axis Field Selection" to "Temperature" by clicking the plus sign next to "Specify Value".  Label the Y axis "Temperature" in the "Axis Label" text box.  Use the "X Axis Field Selection" drop-down to select "DateTime" as the X axis value.  Set the X axis label to "Time".  Leave "Horizontal" unchecked for "Orientation", and leave "Data Series Selection" blank.  Finally, click "Create".  You can view this visualization in real-time in the "Visualizations" tab of the "Temperature Visual" rule stage, or in a dashboard as described in a following section.
 
 ### Create Targets
 Targets allow specific OSA events to trigger other actions.  By right-clicking on the final stage in a stream, you can add a target stage.  Targets are outside the scope of this walkthrough, but targets can have connection types such as Kafka, CSV File, REST, and much more, depending on your implementation needs.  The Oracle Stream Analytics official documentation has more information on Targets.
@@ -191,6 +191,6 @@ Dashboards allow you to view multiple visualizations on one screen.  However, be
 
 Click "Done" in the top left of the screen to return to the catalog.  Now click "Create New Item" and select "Dashboard" from the drop-down menu.  Give your dashboard a name, and provide a description and tags if desired.  Click "Next".  Leave CSS blank, and click "Save".  Click on your new dashboard in the catalog to open it.
 
-The dasboard tools are at the top right corner of the new dashboard.  Click the plus icon, then navigate the visualization list and check the box next to "TemperatureChart" or any other visualizations you may have created.  Click "Add Visualizations"  Once added, click the save icon in the dashboard to save the current state of the dashboard for future use.
+The dasboard tools are at the top right corner of the new dashboard.  Click the plus icon, then navigate the visualization list and check the box next to "TemperatureChart" or any other visualizations you may have created.  These may appear on the second page of the list.  Click "Add Visualizations"  Once added, click the save icon in the dashboard to save the current state of the dashboard for future use.
 
 ## Next Steps
