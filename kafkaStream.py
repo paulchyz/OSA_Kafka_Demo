@@ -1,3 +1,6 @@
+# OSA Kafka Python Demo Script
+# Created by Paul Chyz on 10/24/2018
+
 from kafka import KafkaProducer
 import json, time
 
