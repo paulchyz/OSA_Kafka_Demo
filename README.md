@@ -12,7 +12,7 @@ These instruciton will explain the steps necessary to stream data into OSA on Ra
 
 Installing kafka-python:
 ```
-pip install kafka-python
+sudo pip install kafka-python
 ```
 
 ### File Structure
@@ -196,4 +196,4 @@ The dasboard tools are at the top right corner of the new dashboard.  Click the 
 ## Next Steps
 You have now successfully connected OSA, Kafka, and Python for streaming demo data.  With all of this complete, the next steps are to expand on this foundation and implement solutions for actual use cases.  While this demo uses sample data in the form of a local json file, you can redesign the data source in Python to fit your solution using the two key Python commands described in the "Key Points" section of this documentation.  
 
-For example, the Python script could make the Kafka producer, then run an infinite loop that pulls data from an IoT device and sends it to a Kafka topic.  Another example involves the Python script using API calls to retrieve data from another source, then sending the data to a Kafka topic.  Additionally, it is important to note that you can send data to multiple Kafka topics in the same script, which can be valuable depending on your solution implementation.  For additional information on OSA capabilities, refer to the official Oracle Stream Analytics documentation.
+For example, the Python script could make the Kafka producer, then run an infinite loop that pulls data from an IoT device and sends it to a Kafka topic.  Another example involves the Python script using API calls to retrieve data from another source, then sending the data to a Kafka topic.  Additionally, it is important to note that you can send data to multiple Kafka topics in the same script, which can be valuable depending on your solution implementation.  For additional information on OSA capabilities, refer to the official [Oracle Stream Analytics documentation](https://docs.oracle.com/middleware/1221/osa/using-streamanalytics/toc.htm).
