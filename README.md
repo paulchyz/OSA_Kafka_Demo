@@ -183,9 +183,14 @@ Next, click "Add Action" in the "THEN" section.  In the "Select a field" drop-do
 
 After creating the rule, click the "Visualizations" tab in the rule stage editor, click "Add a Visualization", and select "Line Chart".  In the pop-up window name your chart "TemperatureChart" and give it a description and tags if desired.  Set the "Y Axis Field Selection" to "Temperature" by clicking the plus sign next to "Specify Value".  Label the Y axis "Temperature" in the "Axis Label" text box.  Use the "X Axis Field Selection" drop-down to select "DateTime" as the X axis value.  Set the X axis label to "Time".  Leave "Horizontal" unchecke for "Orientation", and leave "Data Series Selection" blank.  Finally, click "Create".  You can view this visualization in real-time in the "Visualizations" tab of the "Temperature Visual" rule stage, or in a dashboard as described in a following section.
 
-### Set Targets
+### Create Targets
 Targets allow specific OSA events to trigger other actions.  By right-clicking on the final stage in a stream, you can add a target stage.  Targets are outside the scope of this walkthrough, but targets can have connection types such as Kafka, CSV File, REST, and much more, depending on your implementation needs.  The Oracle Stream Analytics official documentation has more information on Targets.
 
 ### Create a Dashboard
+Dashboards allow you to view multiple visualizations on one screen.  However, before creating a dashboard you need to publish any pipelines that have visualizations you want to include.  For this demo, publish your pipeline by clicking "Publish" in the top right corner of the screen.  Leave all values as default on the publishing window, and click "Publish"  This will prevent any additional changes to your pipeline, though you can unpublish at any time if edits are needed.
+
+Click "Done" in the top left of the screen to return to the catalog.  Now click "Create New Item" and select "Dashboard" from the drop-down menu.  Give your dashboard a name, and provide a description and tags if desired.  Click "Next".  Leave CSS blank, and click "Save".  Click on your new dashboard in the catalog to open it.
+
+The dasboard tools are at the top right corner of the new dashboard.  Click the plus icon, then navigate the visualization list and check the box next to "TemperatureChart" or any other visualizations you may have created.  Click "Add Visualizations"  Once added, click the save icon in the dashboard to save the current state of the dashboard for future use.
 
 ## Next Steps
