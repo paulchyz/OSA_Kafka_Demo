@@ -22,7 +22,7 @@ For the demo to run successfully, make sure that the provided data file "iotData
 ![image](https://user-images.githubusercontent.com/42782692/47517279-8cff9e80-d83c-11e8-96ec-6c76bd360e0a.png)
 
 ## Setting Up Ravello for OSA
-If you have access to the Oracle Ravello "OSA OGG Demo" Blueprint, follow the steps below to configure the blueprint for use with the rest of this walkthrough.
+If someone has shared access to the Oracle Ravello "OSA OGG Demo" Blueprint with you, follow the steps below to configure the blueprint for use with the rest of this walkthrough.
 
 ### Initialize the Ravello Application
 In Ravello, click "Library", then click "Blueprints".  Click the "Shared with Me" button in the top right of the page, and click on the "OSA OGG Demo" blueprint.  Now click the orange "Copy to My Blueprints" button, then navigate back to your blueprint library and click on your new blueprint.  Click "Create Application" and provide a different name if desired.  Locate this new application in the applications menu, and click "Publish".  
